@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_weather_bloc/weather.dart';
 
+// we use state in bloc for the output.
 class WeatherState extends Equatable {
   @override
   List<Object?> get props => [];
@@ -12,15 +13,16 @@ class WeatherNotSearchState extends WeatherState {}
 //when weather is loading == shows circular indicator
 class WeatherIsSearchingState extends WeatherState {}
 
-//when wearther is loaded, API weather should be displayed
+//when weather is loaded, data should be displayed
 class WeatherIsSearchedState extends WeatherState {
-  final weather;
-  WeatherIsSearchedState(this.weather);
-  //created weather getter
-  Weather get getWeather => weather;
+  final Weather? weather;
+  WeatherIsSearchedState({this.weather});
+
+  // Weather get getWeather => weather;
 
   @override
   List<Object?> get props => [weather];
 }
 
-class WeatherIsNotLoaded extends WeatherState {}
+//when weather is not loaded.
+class WeatherNotLoaded extends WeatherState {}

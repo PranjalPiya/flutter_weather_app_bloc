@@ -1,15 +1,11 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_weather_bloc/bloc/weather/weather_bloc.dart';
 import 'package:flutter_weather_bloc/bloc/weather/weather_event.dart';
 import 'package:flutter_weather_bloc/bloc/weather/weather_state.dart';
-
-import 'package:flutter_weather_bloc/weather.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'fetch_weather.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,19 +18,8 @@ class _HomePageState extends State<HomePage> {
   final _formvalid = GlobalKey<FormState>();
   String? cData;
   TextEditingController searchWeather = TextEditingController();
-  // final weatherBloc = WeatherBloc(WeatherNotSearchState());
-
-  // Future<Weather>? data;
-
-  // @override
-  // void initState() {
-  //   data = Fetch.weatherData();
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // final weatherBloc = BlocProvider.of<WeatherBloc>(context);
     return Scaffold(
       backgroundColor: Colors.blue.shade200,
       appBar: AppBar(
@@ -173,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                             height: 20,
                           ),
                           Text(
-                            '${state.getWeather.location?.country}',
+                            '${state.weather?.location?.country}',
                             style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
@@ -185,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                               Icon(Icons.location_pin),
                               SizedBox(width: 5),
                               Text(
-                                '${state.getWeather.location?.name} ',
+                                '${state.weather?.location?.name} ',
                                 style: GoogleFonts.lato(
                                   textStyle: TextStyle(
                                       fontSize: 35,
@@ -207,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: NetworkImage(
-                                    'http:${state.getWeather.current?.condition?.icon}'),
+                                    'http:${state.weather?.current?.condition?.icon}'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -216,14 +201,14 @@ class _HomePageState extends State<HomePage> {
                             height: 10,
                           ),
                           Text(
-                            "${state.weather.current?.tempC}° C",
+                            "${state.weather?.current?.tempC}° C",
                             style: TextStyle(
                               fontSize: 50,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
-                            "${state.getWeather.current?.condition?.text}",
+                            "${state.weather?.current?.condition?.text}",
                             style: TextStyle(
                               fontSize: 20,
                               fontStyle: FontStyle.italic,
@@ -233,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                             height: 10,
                           ),
                           Text(
-                            "${state.getWeather.location?.localtime}",
+                            "${state.weather?.location?.localtime}",
                             style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontSize: 12,
@@ -258,7 +243,7 @@ class _HomePageState extends State<HomePage> {
                                     child: Column(
                                       children: [
                                         Text(
-                                            '${state.getWeather.current?.humidity}'),
+                                            '${state.weather?.current?.humidity}'),
                                         SizedBox(
                                           height: 5,
                                         ),
@@ -279,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                                     child: Column(
                                       children: [
                                         Text(
-                                            '${state.getWeather.current?.windKph}'),
+                                            '${state.weather?.current?.windKph}'),
                                         SizedBox(
                                           height: 5,
                                         ),
@@ -300,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                                     child: Column(
                                       children: [
                                         Text(
-                                            '${state.getWeather.current?.feelslikeC}° C'),
+                                            '${state.weather?.current?.feelslikeC}° C'),
                                         SizedBox(
                                           height: 5,
                                         ),

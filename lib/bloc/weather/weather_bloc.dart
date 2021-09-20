@@ -17,25 +17,13 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       try {
         Weather? weather =
             await Fetch.weatherData(cityWeather: "${event.city}");
-        yield WeatherIsSearchedState(weather);
+        yield WeatherIsSearchedState(weather: weather);
       } catch (_) {
         yield WeatherNotSearchState();
       }
     }
-
-    // if (event is GetWeatherFromSearch) {
-    //   yield* mapWeatherFromSearch(event);
-    // }
-
     if (event is RefreshWeather) {
       yield WeatherNotSearchState();
     }
   }
-
-  //Weather is searched
-  // Stream<WeatherState> mapWeatherFromSearch(
-  //     GetWeatherFromSearch getWeatherFromSearch) async* {
-  //   Weather? weather = await Fetch.weatherData();
-  //   yield WeatherIsSearchedState(weather);
-  // }
 }
